@@ -3,6 +3,7 @@ package ru.netology.page;
 import com.codeborne.selenide.SelenideElement;
 import ru.netology.data.DataHelper;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -19,5 +20,10 @@ public class LoginPage {
         $("[data-test-id=password] input").setValue(info.getPassword());
         $("[data-test-id=action-login]").click();
         return new VerificationPage();
+    }
+
+    public void searchErrorMessage() {
+        $("[data-test-id='error-notification']").waitUntil(visible, 10000).
+                shouldHave(text("Система заблокирована"));
     }
 }

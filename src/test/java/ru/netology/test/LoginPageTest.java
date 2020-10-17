@@ -1,8 +1,10 @@
 package ru.netology.test;
 
 import lombok.val;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
+import ru.netology.page.DashboardPage;
 import ru.netology.page.LoginPage;
 
 import java.sql.SQLException;
@@ -10,6 +12,12 @@ import java.sql.SQLException;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPageTest {
+
+    @AfterAll
+    static void cleanBase()  {
+        val dashboardPage = new DashboardPage();
+        dashboardPage.cleanDataBase();
+    }
 
     @Test
     void shouldLoginWithSmsCode() throws SQLException {
@@ -23,7 +31,7 @@ public class LoginPageTest {
     }
 
     @Test
-    void loginWithWrongPassword() {
+    void loginWithWrongPassword() throws SQLException {
         open("http://localhost:9999");
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfoWithWrongPassword();
@@ -32,7 +40,7 @@ public class LoginPageTest {
     }
 
     @Test
-    void loginFourTimesWithWrongPassword() {
+    void loginFourTimesWithWrongPassword() throws SQLException {
         open("http://localhost:9999");
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfoWithWrongPassword();
@@ -46,6 +54,6 @@ public class LoginPageTest {
         loginPage.errorNotificationCreate();
 
         loginPage.validLogin(authInfo);
-        loginPage.errorNotificationCreate();
+        loginPage.searchErrorMessage();
     }
 }

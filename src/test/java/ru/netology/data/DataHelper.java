@@ -35,7 +35,7 @@ public class DataHelper {
         private String code;
     }
 
-    public static VerificationCode getVerificationCode() throws SQLException {
+    public static VerificationCode getVerificationCode(){
         String verificationCode = "";
         val codesSQL = "SELECT * FROM auth_codes ORDER BY created DESC LIMIT 1;";
         val runner = new QueryRunner();
@@ -43,6 +43,10 @@ public class DataHelper {
                 "app", "pass")) {
             val usersCode = runner.query(conn, codesSQL, new BeanHandler<>(User.class));
             verificationCode = usersCode.getCode();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+
         }
         return new VerificationCode(verificationCode);
     }
