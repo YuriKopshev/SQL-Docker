@@ -50,4 +50,19 @@ public class DataHelper {
         }
         return new VerificationCode(verificationCode);
     }
+
+    public static void cleanDataBase(){
+        val cleanCards = "DELETE FROM cards";
+        val cleanAuthCodes = "DELETE FROM auth_codes";
+        val cleanUser = "DELETE FROM users";
+        val runner = new QueryRunner();
+        try (val conn = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/app", "app", "pass")) {
+            val cleanCardsUser = runner.execute(conn, cleanCards, new BeanHandler<>(User.class));
+            val cleanAuthCodesUser = runner.execute(conn, cleanAuthCodes, new BeanHandler<>(User.class));
+            val cleanUserUser = runner.execute(conn, cleanUser, new BeanHandler<>(User.class));
+        }
+        catch (SQLException exception){
+            exception.printStackTrace();
+        }
+    }
 }

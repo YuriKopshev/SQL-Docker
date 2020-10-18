@@ -15,8 +15,8 @@ public class LoginPageTest {
 
     @AfterAll
     static void cleanBase()  {
-        val dashboardPage = new DashboardPage();
-        dashboardPage.cleanDataBase();
+        DataHelper.cleanDataBase();
+
     }
 
     @Test
