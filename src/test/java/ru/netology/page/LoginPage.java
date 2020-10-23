@@ -1,7 +1,10 @@
 package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Keys;
 import ru.netology.data.DataHelper;
+
+import javax.security.auth.kerberos.KerberosKey;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -25,5 +28,10 @@ public class LoginPage {
     public void searchErrorMessage() {
         $("[data-test-id='error-notification']").waitUntil(visible, 10000).
                 shouldHave(text("Система заблокирована"));
+    }
+
+    public void cleanField(){
+        $("[data-test-id=login] input").doubleClick().sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=password] input").doubleClick().sendKeys(Keys.BACK_SPACE);
     }
 }

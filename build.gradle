@@ -20,6 +20,8 @@ dependencies {
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'com.codeborne:selenide:5.3.1'
+    testImplementation 'io.rest-assured:rest-assured:4.3.0'
+    compile group: 'org.json', name: 'json', version: '20090211'
 }
 
 test {

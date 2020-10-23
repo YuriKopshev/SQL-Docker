@@ -20,7 +20,7 @@ public class LoginPageTest {
     }
 
     @Test
-    void shouldLoginWithSmsCode() throws SQLException {
+    void shouldLoginWithSmsCode() {
         open("http://localhost:9999");
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfo();
@@ -31,7 +31,7 @@ public class LoginPageTest {
     }
 
     @Test
-    void loginWithWrongPassword() throws SQLException {
+    void loginWithWrongPassword() {
         open("http://localhost:9999");
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfoWithWrongPassword();
@@ -40,18 +40,21 @@ public class LoginPageTest {
     }
 
     @Test
-    void loginFourTimesWithWrongPassword() throws SQLException {
+    void loginFourTimesWithWrongPassword()  {
         open("http://localhost:9999");
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfoWithWrongPassword();
         loginPage.validLogin(authInfo);
         loginPage.errorNotificationCreate();
+        loginPage.cleanField();
 
         loginPage.validLogin(authInfo);
         loginPage.errorNotificationCreate();
+        loginPage.cleanField();
 
         loginPage.validLogin(authInfo);
         loginPage.errorNotificationCreate();
+        loginPage.cleanField();
 
         loginPage.validLogin(authInfo);
         loginPage.searchErrorMessage();

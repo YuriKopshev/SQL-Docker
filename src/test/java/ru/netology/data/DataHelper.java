@@ -57,9 +57,9 @@ public class DataHelper {
         val cleanUser = "DELETE FROM users";
         val runner = new QueryRunner();
         try (val conn = DriverManager.getConnection("jdbc:mysql://192.168.99.100:3306/app", "app", "pass")) {
-            val cleanCardsUser = runner.execute(conn, cleanCards, new BeanHandler<>(User.class));
-            val cleanAuthCodesUser = runner.execute(conn, cleanAuthCodes, new BeanHandler<>(User.class));
-            val cleanUserUser = runner.execute(conn, cleanUser, new BeanHandler<>(User.class));
+            val cleanCardsUser = runner.execute(conn, cleanCards);
+            val cleanAuthCodesUser = runner.execute(conn, cleanAuthCodes);
+            val cleanUserUser = runner.execute(conn, cleanUser);
         }
         catch (SQLException exception){
             exception.printStackTrace();
